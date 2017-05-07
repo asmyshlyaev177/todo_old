@@ -4,17 +4,21 @@ from todoapp.serializers import TodoSerializer, TaskSerializer
 from todoapp.models import TodoList, Task
 from rest_framework import mixins
 
+        
+        
 class TodoListView(generics.ListCreateAPIView):
     """
     View for display list and create Todo
     get:
-    Return a list of all Todo
+    Return a list of all Todo,
+    filter completed tasks ?complete=true
     post:
     Create a new Todo
     """
-    
     serializer_class = TodoSerializer
     queryset = TodoList.objects.all()
+    filter_fields = ['complete']
+    
     
     
 class TodoRUDView(generics.RetrieveUpdateDestroyAPIView):

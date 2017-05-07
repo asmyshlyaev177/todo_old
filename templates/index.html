@@ -19,8 +19,28 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <nav class="navbar navbar-default">
+        <div>
+          <a class="navbar-brand nav-justified text-center" href="#">Simple SPA ToDo App</a>
+        </div>
+        </nav>
+        
+        <div class="container">
+        <div class="row">
+            
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-primary">Add ToDo</button>
+                <button type="button" class="btn btn-info">Pending ToDo</button>
+                <button type="button" class="btn btn-success">Completed Todo</button>
+            </div>
+        </div>   
+            
+        <div class="row">
+            <div id="content"></div>
+        </div>
+            
+        </div>
+        
 
         <script src="/static/js/jquery-3.2.1.slim.min.js"></script>
         <script src="/static/js/bootstrap.min.js"></script>
