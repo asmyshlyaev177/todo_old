@@ -25,7 +25,7 @@ SECRET_KEY = 'w*b8n$n6(3xn0e6vl6zpw=#a1ltjbz_h#=kfcax)eiu)@u3+k8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'todoapp',
     'django_extensions',
     'rest_framework',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [

@@ -8,6 +8,9 @@ class Todo(models.Model):
     
     class Meta:
         abstract = True
+        
+    def __str__(self):
+        return "{} - {}".format(self.title, self.created)
 
     
 class TodoList(Todo):
@@ -16,4 +19,4 @@ class TodoList(Todo):
     
 class Task(Todo):
     order = models.PositiveSmallIntegerField(blank=True, null=True)
-    todo = models.ForeignKey('TodoList')
+    todo = models.ForeignKey('TodoList', related_name='task')
