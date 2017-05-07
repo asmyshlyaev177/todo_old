@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'^todo/(?P<pk>([0-9]+))?', views.TodoRUDView.as_view(), name = 'todo'),
     url(r'^tasklist/', views.TaskListView.as_view(), name='tasklist'),
     url(r'^task/(?P<pk>([0-9]+))?', views.TaskRUDView.as_view(), name='task'),
+    
+    url(r'^$', views.MainPage.as_view(), name='main'),
 ]

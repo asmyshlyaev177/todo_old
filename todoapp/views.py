@@ -1,8 +1,8 @@
 from rest_framework import generics
+from django.views import generic as djcbv
 from todoapp.serializers import TodoSerializer, TaskSerializer
 from todoapp.models import TodoList, Task
 from rest_framework import mixins
-
 
 class TodoListView(generics.ListCreateAPIView):
     """
@@ -57,3 +57,8 @@ class TaskRUDView(generics.RetrieveUpdateDestroyAPIView):
     """
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
+
+    
+class MainPage(djcbv.TemplateView):
+    http_method_names = [u'get', u'head', u'options']
+    template_name = 'index.html'
