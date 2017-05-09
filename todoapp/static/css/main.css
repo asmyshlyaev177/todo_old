@@ -1,0 +1,42 @@
+
+.add-task-btn,  .rm-todo-btn, .edit-todo-btn, .new-elem-input {
+    margin-top: 1rem;
+}
+
+.btn {
+    margin-left: 1rem;
+}
+
+.new-elem-input {
+    display: inline-block;
+    width: 50%;
+    margin-left: 1.5rem;
+}
+
+.todo-header {
+    display: inline-block;
+}
+
+.task, .buttons {
+    display: inline-block;
+    cursor: pointer;
+    /* vertical-align: sub; */
+}
+
+.task[complete], .todo-header[complete] {
+    text-decoration: line-through;
+}
+
+.task-group {
+    border: 1px solid black;
+    margin-bottom: 3px;
+    height: 2em;
+}
+
+.task-rm, .task-edit {
+    cursor: pointer;
+}
+
+div[contenteditable="true"], .todo-header[contenteditable="true"] {
+  background-color: rgba(39, 255, 0, 0.35);
+}
