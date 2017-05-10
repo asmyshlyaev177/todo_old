@@ -17,17 +17,18 @@ $(window).on('load', (function(){
 
 
 function RegisterPartial() {
+    //шаблон для тасков
     Handlebars.registerPartial('task',
-    `<div class="task-group">
-        <div class="task" todo={{todo}} taskid={{id}} 
-        {{#if complete }}complete {{/if}}>{{title}}</div>
-        <div class="buttons pull-right">
-                <span class="task-edit btn-default btn-xs glyphicon glyphicon-pencil" todo={{todo}} elem={{id}}></span>
-                <span class="task-rm btn-default btn-xs glyphicon glyphicon-remove" todo={{todo}} elem={{id}}></span>
-                <span class="task-ok btn-default btn-xs glyphicon glyphicon-ok" todo={{todo}} elem={{id}} style="display: none;"></span>
-        </div>
+    '<div class="task-group">\n\
+        <div class="task" todo={{todo}} taskid={{id}}\n\
+        {{#if complete }}complete {{/if}}>{{title}}</div>\n\
+        <div class="buttons pull-right">\n\
+                <span class="task-edit btn-default btn-xs glyphicon glyphicon-pencil" todo={{todo}} elem={{id}}></span>\n\
+                <span class="task-rm btn-default btn-xs glyphicon glyphicon-remove" todo={{todo}} elem={{id}}></span>\n\
+                <span class="task-ok btn-default btn-xs glyphicon glyphicon-ok" todo={{todo}} elem={{id}} style="display: none;"></span>\n\
+        </div>\n\
     
-    </div>`);
+    </div>');
 }
 
 function DataSort(arr, field, reverse=false) {
@@ -48,6 +49,7 @@ function CompileTemplate(){
 }
 
 function GetTodoList(complete=null) {
+    //основная функция получения списка тодо, complete м.б. null, false или true
     var url = '/todolist/';
     if ( complete != null ) {
         url = '/todolist/?complete='+complete;
@@ -58,8 +60,10 @@ function GetTodoList(complete=null) {
         method: 'GET',
         url: url,
         success: function(data) {
+            //прячем поле для новых тасков на начальную позицию, а то удалиться или задвоится
             var form = $('.new-elem').hide();
-            $('.main-buttons').after(form);
+                $('.main-buttons').after(form);
+            
             var context = new Array();
             for (var i=0; i < data.length; i++) {
                 DataSort(data[i].task, 'order');
@@ -73,6 +77,7 @@ function GetTodoList(complete=null) {
 }
  
 function TodoButtons() {
+    //эвенты для кнопок
     $(document).on('click', '.navbar-brand', function() {
         GetTodoList();
         return false;
@@ -88,7 +93,7 @@ function TodoButtons() {
     });
     $(document).on('click', '.add-todo', function() {
         var form = $('.new-elem');
-        $(form).attr('type', 'todo');
+        $(form).attr('type', 'todo'); //отмечаем тип добавляемого элементы
         $('.main-buttons').after(form);
         $(form).show();
         $('#newelem').focus();
@@ -104,6 +109,7 @@ function TodoButtons() {
 }
 
 function SaveAndSubmit() {
+    //кнопка сохранить при добавлении нового тодо или таска
     $(document).on('click', '.save-elem', function() {
         var title = $('#newelem').val();
         var dataToSend;
@@ -133,7 +139,7 @@ function SaveAndSubmit() {
                     if (type == 'todo') {
                         var context = new Array();
                         context['todo'] = [data];
-                        var html = todo(context);
+                        var html = todo(context); //передаём данные в шаблон
                         $('#content').append(html);
                     } else if (type == 'task') {
                         var context = new Array();
@@ -148,20 +154,23 @@ function SaveAndSubmit() {
 }
 
 function ToggleEditMode(todoid, taskid) {
-    if ( todoid && taskid ) {
+    //переключатель режима редактирования для названий тасков и тодо
+    if ( todoid && taskid ) { //для тасков
        if ($('div.task[todo='+todoid+'][taskid='+taskid+']').attr('contenteditable')) 
+           //если уже редактируется выключаем
             {
                 $('div.task[todo='+todoid+'][taskid='+taskid+']').removeAttr('contenteditable');
                 $('span.task-edit[todo='+todoid+'][elem='+taskid+']').show();
                 $('span.task-rm[todo='+todoid+'][elem='+taskid+']').show();
                 $('span.task-ok[todo='+todoid+'][elem='+taskid+']').hide();
             } else {
+                //иначе ставим контентедитэбл, прячем кнопки удалить и редактировать и показываем кнопку ок
                 $('div.task[todo='+todoid+'][taskid='+taskid+']').attr('contenteditable', 'true').focus();
                 $('span.task-edit[todo='+todoid+'][elem='+taskid+']').hide();
                 $('span.task-rm[todo='+todoid+'][elem='+taskid+']').hide();
                 $('span.task-ok[todo='+todoid+'][elem='+taskid+']').show();
             } 
-    } else if (todoid && !taskid ) {
+    } else if (todoid && !taskid ) { //для тодо
         if ( $('.todo-header[todoid='+todoid+']').attr('contenteditable') ) {
             $('.todo-edit[elem='+todoid+']').show();
             $('.todo-ok[elem='+todoid+']').hide();
@@ -188,7 +197,7 @@ function TaskEdit() {
         var todoid = $(elem).attr('todo');
         var taskid = $(elem).attr('elem');
         var title = $('div.task[todo='+todoid+'][taskid='+taskid+']').text().trim();
-        //task update
+        //обновляем таск
         var csrf = getCookie('csrftoken');
         $.ajax({
             headers: {'X-CSRFToken': csrf},
@@ -249,45 +258,8 @@ function TaskDelete() {
     })    
 }
 
-function TaskClick() {
-    $(document).on('click', 'div.task', function() {
-        if ( !$(this).is('[contenteditable]') ) {
-            var elem = $(this);
-            var todoid = $(elem).attr('todo');
-            var taskid = $(elem).attr('taskid');
-            var complete;
-            var completed;
-            if ($(elem).is('[complete]')) {
-                complete = false;
-                completed = null;
-            } else {
-                var d = new Date();
-                complete = true;
-                completed = d.toISOString();
-            }
-            var csrf = getCookie('csrftoken');
-            $.ajax({
-                    headers: {'X-CSRFToken': csrf},
-                    cache: false,
-                    dataType: 'json',
-                    method: 'PATCH',
-                    url: '/task/'+taskid,
-                    data: {"todo": todoid, "complete": complete, "completed": completed},
-                    success: function(data) {
-                        if (data.complete == true) {
-                            $(elem).attr('complete', '');
-                        } else {
-                            $(elem).removeAttr('complete');
-                        };
-                        CheckTodoComplete(todoid);
-                    }
-            }); 
-        }
-        
-    })
-}
-
 function CheckTodoComplete(todoid) {
+    //при отметке таска как выполненного проверяем если все таски завершены тодо тоже меняет статус
     var complete;
     var completed;
     var csrf = getCookie('csrftoken');
@@ -335,6 +307,45 @@ function CheckTodoComplete(todoid) {
             });  
         }
     }
+}
+
+function TaskClick() {
+    //переключаем статус тасков выполнено/невыполнено по клику
+    $(document).on('click', 'div.task', function() {
+        if ( !$(this).is('[contenteditable]') ) {
+            var elem = $(this);
+            var todoid = $(elem).attr('todo');
+            var taskid = $(elem).attr('taskid');
+            var complete;
+            var completed;
+            if ($(elem).is('[complete]')) {
+                complete = false;
+                completed = null;
+            } else {
+                complete = true;
+                var d = new Date();
+                completed = d.toISOString();
+            }
+            var csrf = getCookie('csrftoken');
+            $.ajax({
+                    headers: {'X-CSRFToken': csrf},
+                    cache: false,
+                    dataType: 'json',
+                    method: 'PATCH',
+                    url: '/task/'+taskid,
+                    data: {"todo": todoid, "complete": complete, "completed": completed},
+                    success: function(data) {
+                        if (data.complete == true) {
+                            $(elem).attr('complete', '');
+                        } else {
+                            $(elem).removeAttr('complete');
+                        };
+                        CheckTodoComplete(todoid);
+                    }
+            }); 
+        }
+        
+    })
 }
 
 function TodoDelete() {

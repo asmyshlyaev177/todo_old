@@ -45,7 +45,22 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'crispy_forms',
+    'compressor',
 ]
+
+import compressor
+COMPRESS_ENABLED = False
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
+                       'compressor.filters.datauri.CssDataUriFilter',
+                       'compressor.filters.yuglify.YUglifyCSSFilter']
+COMPRESS_DATA_URI_MAX_SIZE = 100500
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,6 +136,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'todoapp/static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'todoapp/static/media')
 MEDIA_URL = '/media/'
