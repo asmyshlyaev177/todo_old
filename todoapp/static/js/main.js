@@ -19,16 +19,16 @@ $(window).on('load', (function(){
 function RegisterPartial() {
     //шаблон для тасков
     Handlebars.registerPartial('task',
-    '<div class="task-group">\n\
-        <div class="task" todo={{todo}} taskid={{id}}\n\
-        {{#if complete }}complete {{/if}}>{{title}}</div>\n\
-        <div class="buttons pull-right">\n\
-                <span class="task-edit btn-default btn-xs glyphicon glyphicon-pencil" todo={{todo}} elem={{id}}></span>\n\
-                <span class="task-rm btn-default btn-xs glyphicon glyphicon-remove" todo={{todo}} elem={{id}}></span>\n\
-                <span class="task-ok btn-default btn-xs glyphicon glyphicon-ok" todo={{todo}} elem={{id}} style="display: none;"></span>\n\
-        </div>\n\
+    '<div class="task-group">'+
+        '<div class="task" todo={{todo}} taskid={{id}}'+
+        '{{#if complete }}complete {{/if}}>{{title}}</div>'+
+        '<div class="buttons pull-right">'+
+                '<span class="task-edit btn-default btn-xs glyphicon glyphicon-pencil" todo={{todo}} elem={{id}}></span>'+
+                '<span class="task-rm btn-default btn-xs glyphicon glyphicon-remove" todo={{todo}} elem={{id}}></span>'+
+                '<span class="task-ok btn-default btn-xs glyphicon glyphicon-ok" todo={{todo}} elem={{id}} style="display: none;"></span>'+
+        '</div>'+
     
-    </div>');
+    '</div>');
 }
 
 function DataSort(arr, field, reverse=false) {
