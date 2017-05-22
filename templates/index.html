@@ -43,36 +43,20 @@
         {% endverbatim %}
         
         
-        <nav class="navbar navbar-default">
-        <div>
-          <a class="navbar-brand nav-justified text-center" href="/">Simple SPA ToDo App</a>
-        </div>
-        </nav>
-        
-        <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center main-buttons">
-                <button type="button" class="btn btn-primary add-todo">Add ToDo</button>
-                <button type="button" class="btn btn-info pending-todo">Pending ToDo</button>
-                <button type="button" class="btn btn-default all-todo">All ToDo</button>
-                <button type="button" class="btn btn-success completed-todo">Completed Todo</button>
-            </div>
-        </div>
+
                 
         <div class="new-elem text-center" style="display: none;">
                 <input type="text" class="form-control new-elem-input" id="newelem" placeholder="Title">
                 <button type="button" class="btn btn-default save-elem">Save</button>
         </div>   
             
-        <div id="content"></div>
+        <div id="root"></div>
              
-        </div>
-        
-        {% compress js %}
+        <!-- <script src="/static/js/bootstrap.min.js"></script> 
         <script src="/static/js/jquery-3.2.1.min.js"></script>
-        <script src="/static/js/bootstrap.min.js"></script>
-        <script src="/static/js/handlebars-v4.0.5.js"></script>
-        <script src="/static/js/main.js"></script>
+        -->
+        {% compress js %}
+        <script src="/static/js/bundle.js"></script>
         {% endcompress %}
     </body>
 </html>

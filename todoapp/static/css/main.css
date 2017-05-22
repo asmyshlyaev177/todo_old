@@ -23,7 +23,7 @@
     /* vertical-align: sub; */
 }
 
-.task[complete], .todo-header[complete] {
+.completed {
     text-decoration: line-through;
 }
 
