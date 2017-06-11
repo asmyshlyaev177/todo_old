@@ -1,0 +1,45 @@
+<template>
+<div>
+    <section>
+        <div class="container">
+            <div class="columns is-multiline">
+
+            <Todo v-if="newTodo.addingNew" :todo="newTodo" ></Todo>
+
+            <span v-if="fetching" class="icon is-large myloader-container">
+                <i class="fa fa-spin fa-spinner fa-6 myloader">
+                </i>
+            </span>
+            <Todo v-else v-for="todo in todolistFiltered" :key=todo.id :todo="todo" ></Todo>
+            </div>
+        </div>
+    </section>
+</div>
+</template>
+
+<script>
+import store from '../main.js';
+import Todo from './Todo';
+
+export default {
+    props: ['activeMenu'],
+    data() {
+        return this.$store.state
+    },
+    components: {
+        'Todo': Todo
+    },
+    computed: {
+      todolistFiltered() {
+          switch(this.activeMenu) {
+                 case 'all':
+                    return this.todolist;
+                 case 'pending':
+                    return _.filter(this.todolist, ['complete', false]);
+                 case 'completed':
+                    return _.filter(this.todolist, ['complete', true]);
+                 }
+      }  
+    }
+}
+</script>

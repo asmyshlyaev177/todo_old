@@ -111,7 +111,7 @@ export default {
             } else { return false }
         },
         newTodo() {
-            if (this.$store.state.newTodo.addingNew) {
+            if (!this.todo.id) {
                 return true 
             } else { return false }
         }

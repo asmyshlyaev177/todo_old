@@ -6,21 +6,21 @@
         <span class="icon"><i class="fa fa-plus"></i></span>
         <span>Add Todo</span>
     </a>
-    <a class="button is-info is-focused is-medium" 
-       v-on:click="clickMenu('pending')" :class="{ 'is-active': pending }">
-        <span class="icon"><i :class="{ 'fa-spin': pending }"  class="fa fa-spinner "></i></span>
+    <router-link to="/pending" class="button is-info is-focused is-medium" 
+       v-on:click="clickMenu('pending')">
+        <span class="icon"><i :class="{ 'fa-spin': pending }" class="fa fa-spinner "></i></span>
         <span>Pending todo</span>
-    </a>
-    <a class="button is-focused is-medium" 
-       v-on:click="clickMenu('all')" :class="{ 'is-active': all }">
+    </router-link>
+    <router-link to="/" class="button is-focused is-medium" 
+       v-on:click="clickMenu('all')">
         <span class="icon"><i class="fa fa-list-ul"></i></span>
         <span>All todo</span>
-    </a>
-    <a class="button is-success is-focused is-medium" 
-       v-on:click="clickMenu('completed')" :class="{ 'is-active': completed }">
+    </router-link>
+    <router-link to="/completed" class="button is-success is-focused is-medium" 
+       v-on:click="clickMenu('completed')">
         <span class="icon"><i class="fa fa-check"></i></span>
         <span>Completed</span>
-    </a>
+    </router-link>
 </p>
 
     
@@ -28,20 +28,9 @@
 
 <script>
 export default {
-    props: ['active'],
     computed: {
-        all() {
-            if (this.active == 'all') {
-                return  true
-            }
-        },
         pending() {
-            if (this.active == 'pending') {
-                return true
-            }
-        },
-        completed() {
-            if (this.active == 'completed') {
+            if (this.$route.name == 'pending') {
                 return true
             }
         }

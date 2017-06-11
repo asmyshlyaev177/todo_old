@@ -7,17 +7,18 @@ import 'font-awesome/css/font-awesome.css';
 import Vuex from 'vuex';
 import _ from 'lodash';
 import VueResource from 'vue-resource';
+import VueRouter from 'vue-router';
 Vue.use(VueResource);
 Vue.use(Vuex);
+Vue.use(VueRouter);
 import bus from './components/bus';
     
 var host = '192.168.1.70:8080';
 
 const store = new Vuex.Store({
   state: {
-    active: 'all',
     fetching: false,
-    newTodo: {title: 'A New Todo', addingNew: false},
+    newTodo: {title: 'A New Todo', addingNew: false, task: []},
     todolist: []
   },
   actions: 
@@ -105,9 +106,6 @@ const store = new Vuex.Store({
       }
   },
   mutations: {
-    ChangeActiveMenu(state, val) {
-      state.active = val;
-    },
     FetchAllTodo(state, data) {
         state.todolist = data;
         store.state.fetching = false
@@ -151,7 +149,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   store,
-  //router,
+  router,
   template: '<App/>',
   components: { App }
 })

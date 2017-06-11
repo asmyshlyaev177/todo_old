@@ -2,37 +2,20 @@
   <div id="app">
     
 <AppHeader></AppHeader>   
-<AppMenu :active="active" @changeMenu="ChangeActiveMenu" ></AppMenu>
+<AppMenu></AppMenu>
       
-
-<section>
-<div class="container">
-<div class="columns is-multiline">
-  
-<Todo v-if="newTodo.addingNew" :todo="newTodo" ></Todo>
-
-<span v-if="fetching" class="icon is-large myloader-container">
-    <i class="fa fa-spin fa-spinner fa-6 myloader">
-    </i>
-</span>
-<Todo v-else v-for="todo in todolistFiltered" :key=todo.id :todo="todo" ></Todo>
-
-
-    
-</div>
-</div>
-</section>
+   
+<router-view></router-view>
       
-      
-    <!-- <router-view></router-view> -->
   </div>
 </template>
+
+
 
 <script>
 import AppHeader from './components/Header';
 import AppMenu from './components/Menu';
-import Todo from './components/Todo';
-import Vue from 'vue';
+import Todolist from './components/Todolist';
     
 export default {
     name: 'app',
@@ -42,28 +25,11 @@ export default {
         components: {
         'AppHeader': AppHeader,
         'AppMenu': AppMenu,
-        'Todo': Todo
-    },
-    computed: {
-      todolistFiltered() {
-          switch(this.active) {
-                 case 'all':
-                    return this.todolist;
-                 case 'pending':
-                    return _.filter(this.todolist, ['complete', false]);
-                 case 'completed':
-                    return _.filter(this.todolist, ['complete', true]);
-                 }
-      }  
+        'Todolist': Todolist
     },
     created() {
         this.$store.dispatch('fetchAllTodo')
     },
-    methods: {
-        ChangeActiveMenu(val) {
-            this.$store.commit('ChangeActiveMenu', val);
-        }
-    }
   
 }
 </script>
