@@ -1,0 +1,25 @@
+{
+  "name": "todo-with-vuejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "todoapp/static/js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://asmyshlyaev177@github.com/asmyshlyaev177/todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asmyshlyaev177/todo/issues"
+  },
+  "homepage": "https://github.com/asmyshlyaev177/todo#readme",
+  "dependencies": {
+    "vue": "^2.3.4"
+  },
+  "devDependencies": {
+    "vue-cli": "^2.8.2"
+  }
+}
