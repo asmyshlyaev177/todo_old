@@ -10,7 +10,7 @@
     </p>
       <p v-else class="card-header-title" :style="inputStyle">
 <!-- input for edit todo-->
-        <input ref="title" class="input" v-bind:value="todo.title" type="text" placeholder="Text input">
+        <input ref="title" v-focus class="input" v-bind:value="todo.title" type="text" placeholder="Text input">
       </p>
     <a v-if="!editing && !deleting" @click="editTodo" class="card-header-icon">
 <!-- edit title button-->

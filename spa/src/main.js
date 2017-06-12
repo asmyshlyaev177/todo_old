@@ -15,6 +15,13 @@ import bus from './components/bus';
     
 var host = '192.168.1.70:8080';
 
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus()
+  }
+})
+
+
 const store = new Vuex.Store({
   state: {
     fetching: false,

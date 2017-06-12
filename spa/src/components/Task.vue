@@ -13,7 +13,7 @@
           </div>
           <div v-if="editing" class="card-header-title" :style="inputStyle">
         <!-- input for edit task -->
-            <input ref="taskTitle" class="input" v-bind:value="task.title" type="text" placeholder="New task">
+            <input ref="taskTitle" v-focus class="input" v-bind:value="task.title" type="text" placeholder="New task">
           </div>
           
           <div class="column is-1 has-text-right" style="height: 4em;">
