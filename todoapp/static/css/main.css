@@ -20,7 +20,7 @@
 .task, .buttons {
     display: inline-block;
     cursor: pointer;
-    /* vertical-align: sub; */
+    /* font-weight: bolder; */
 }
 
 .task[complete], .todo-header[complete] {
@@ -30,7 +30,10 @@
 .task-group {
     border: 1px solid black;
     margin-bottom: 3px;
-    height: 2em;
+}
+
+.task-group > .row {
+    margin-left: 0;
 }
 
 .task-rm, .task-edit {

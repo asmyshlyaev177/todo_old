@@ -19,15 +19,17 @@ $(window).on('load', (function(){
 function RegisterPartial() {
     //шаблон для тасков
     Handlebars.registerPartial('task',
-    '<div class="task-group">'+
-        '<div class="task" todo={{todo}} taskid={{id}}'+
-        '{{#if complete }}complete {{/if}}>{{title}}</div>'+
-        '<div class="buttons pull-right">'+
+    '<div class="task-group"> '+
+	'<div class="row">'+
+        '<div class="task col-md-10 col-sm-10 col-xs-10"'+
+	    ' todo={{todo}} taskid={{id}} '+
+            '{{#if complete }}complete {{/if}}>{{title}}</div> '+
+        '<div class="buttons pull-right col-md-2 col-sm-2 col-xs-2">'+
                 '<span class="task-edit btn-default btn-xs glyphicon glyphicon-pencil" todo={{todo}} elem={{id}}></span>'+
                 '<span class="task-rm btn-default btn-xs glyphicon glyphicon-remove" todo={{todo}} elem={{id}}></span>'+
                 '<span class="task-ok btn-default btn-xs glyphicon glyphicon-ok" todo={{todo}} elem={{id}} style="display: none;"></span>'+
         '</div>'+
-    
+    '</div>'+
     '</div>');
 }
 
@@ -251,7 +253,7 @@ function TaskDelete() {
             method: 'DELETE',
             url: '/task/'+taskid,
             success: function(data) {
-                $('div.task[todo='+todoid+'][taskid='+taskid+']').parent().remove();
+                $('div.task[todo='+todoid+'][taskid='+taskid+']').parents('.task-group').remove();
                 CheckTodoComplete(todoid);
             }
         });
