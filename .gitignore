@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 .DS_Store
+*.sqlite3
 node_modules/
 dist/
 npm-debug.log*
