@@ -6,7 +6,7 @@
 
             <Todo v-if="newTodo.addingNew" :todo="newTodo" ></Todo>
 
-            <span v-if="fetching" class="icon is-large myloader-container">
+            <span v-if="fetching" class="icon is-large myloader-container rotating">
                 <i class="icon-spinner myloader">
                 </i>
             </span>

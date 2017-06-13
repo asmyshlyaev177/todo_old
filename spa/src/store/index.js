@@ -2,6 +2,7 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 Vue.use(Vuex);
 import { host } from '../main.js'
+import bus from '../components/bus';
 
 var store = new Vuex.Store({
   state: {
