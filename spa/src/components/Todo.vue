@@ -12,7 +12,7 @@
 <!-- input for edit todo-->
         <input ref="title" v-focus class="input" v-bind:value="todo.title" type="text" placeholder="Text input">
       </p>
-    <a v-if="!editing && !deleting" @click="editTodo" class="card-header-icon">
+    <a v-if="!editing && !deleting" @click="edit" class="card-header-icon">
 <!-- edit title button-->
       <span class="icon">
         <i class="fa fa-pencil"></i>
@@ -70,9 +70,11 @@
 <script>
 import AppTask from './Task';
 import bus from './bus';
+import { todoTaskMixin } from './Mixins';
 
 export default {
     props: ['todo'],
+    mixins: [todoTaskMixin],
     created() {
         bus.$on('new-task', function(id) {
             if (id == this.todo.id) {
@@ -85,8 +87,6 @@ export default {
     },
     data() {
         return {
-            editing: false,
-            deleting: false,
             newTask: {title: 'a new task', addingNew: false}
         }
     },
@@ -94,14 +94,6 @@ export default {
         disabled() {
             if (this.editing || this.newTask.addingNew ) {
                 return true
-            } 
-        },
-        inputStyle() {
-            if (this.editing) {
-                return {
-                    paddingTop: '0.25em',
-                    paddingBottom: '0.25em'
-                }
             } 
         },
         todoCompleted() {
@@ -130,9 +122,6 @@ export default {
       }  
     },
     methods: {
-        editTodo() {
-            this.editing = true;
-        },
         saveTodoTitle() {
             let data = {title: this.$refs.title.value, id: this.todo.id}
             this.editing = false;

@@ -1,5 +1,5 @@
 var path = require('path')
-var glob = require('glob');
+var glob = require('glob-all');
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
@@ -47,17 +47,22 @@ var webpackConfig = merge(baseWebpackConfig, {
     new PurifyCSSPlugin({
       // Give paths to parse for rules. These should be absolute! 
         purifyOptions: {
-            whitelist: ['*purify*']
+            whitelist: ['someclass']
         },
-      paths: glob.sync(path.join(__dirname, '../src/components/*.vue')),
+      paths: glob.sync([
+        path.join(__dirname, '../src/components/*.vue'),
+        path.join(__dirname, '../src/*.vue'),
+        path.join(__dirname, '../index.html'),
+        // other path for HTML or vue files
+      ])
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
+     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true
       }
-    }),
+    }),  
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin

@@ -18,7 +18,7 @@
           
           <div class="column is-1 has-text-right" style="height: 4em;">
         <!-- edit task button-->
-              <a v-if="!editing && !deleting && !task.addingNew" @click="editTask"><span class="icon is-medium"><i class="fa fa-pencil"></i></span></a>
+              <a v-if="!editing && !deleting && !task.addingNew" @click="edit"><span class="icon is-medium"><i class="fa fa-pencil"></i></span></a>
         <!-- save task button -->
               <a v-if="editing && !deleting && !task.addingNew" @click="saveTask"><span class="icon is-medium" style="height: 4em;"><i class="fa fa-check"></i></span></a>
         <!-- delete task button -->
@@ -38,35 +38,17 @@
 </template>
 
 <script>
-    
+import { todoTaskMixin } from './Mixins';
+
 export default {
     props: ['task'],
+    mixins: [todoTaskMixin],
     created() {
       if (this.task.addingNew) {
           this.editing = true
       }
     },
-    data() {
-        return {
-            editing: false,
-            deleting: false
-        }
-    },
-    computed: {
-        inputStyle() {
-            if (this.editing) {
-                return {
-                    paddingTop: '0.25em',
-                    paddingBottom: '0.25em'
-                }
-            } 
-        }
-        
-    },
     methods: {
-        editTask() {
-            this.editing=true;
-        },
         toggleTask() {
             if (!this.editing && !this.deleting) {
                let data = {taskid: this.task.id, todoid: this.task.todo, completed: !this.task.complete};

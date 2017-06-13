@@ -13,7 +13,7 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 import bus from './components/bus';
     
-var host = 'todo.asmyshlyaev177.tk';
+var host = '192.168.1.70:8080';
 
 Vue.directive('focus', {
   inserted: function (el) {

@@ -21,6 +21,10 @@
     "vue": "^2.3.4"
   },
   "devDependencies": {
+    "glob": "^7.1.2",
+    "glob-all": "^3.1.0",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
     "vue-cli": "^2.8.2"
   }
 }
