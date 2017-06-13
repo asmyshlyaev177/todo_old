@@ -22,7 +22,6 @@ import store from '../main.js';
 import Todo from './Todo';
 
 export default {
-    props: ['activeMenu'],
     data() {
         return this.$store.state
     },
@@ -30,13 +29,16 @@ export default {
         'Todo': Todo
     },
     computed: {
+      routePath() {
+          return this.$route.path
+      },
       todolistFiltered() {
-          switch(this.activeMenu) {
-                 case 'all':
+          switch(this.routePath) {
+                 case '/' || '/all':
                     return this.todolist;
-                 case 'pending':
+                 case '/pending':
                     return _.filter(this.todolist, ['complete', false]);
-                 case 'completed':
+                 case '/completed':
                     return _.filter(this.todolist, ['complete', true]);
                  }
       }  

@@ -6,21 +6,21 @@
         <span class="icon"><i class="fa fa-plus"></i></span>
         <span>Add Todo</span>
     </a>
-    <router-link to="/pending" class="button is-info is-focused is-medium" 
+    <nuxt-link to="/pending" class="button is-info is-focused is-medium" 
        v-on:click="clickMenu('pending')">
         <span class="icon"><i :class="{ 'fa-spin': pending }" class="fa fa-spinner "></i></span>
         <span>Pending todo</span>
-    </router-link>
-    <router-link to="/" class="button is-focused is-medium" 
+    </nuxt-link>
+    <nuxt-link to="/" class="button is-focused is-medium" 
        v-on:click="clickMenu('all')">
         <span class="icon"><i class="fa fa-list-ul"></i></span>
         <span>All todo</span>
-    </router-link>
-    <router-link to="/completed" class="button is-success is-focused is-medium" 
+    </nuxt-link>
+    <nuxt-link to="/completed" class="button is-success is-focused is-medium" 
        v-on:click="clickMenu('completed')">
         <span class="icon"><i class="fa fa-check"></i></span>
         <span>Completed</span>
-    </router-link>
+    </nuxt-link>
 </p>
 
     

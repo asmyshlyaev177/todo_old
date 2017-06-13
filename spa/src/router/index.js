@@ -10,20 +10,17 @@ export default new Router({
     {
         path: '/',
         name: 'root',
-        component: Todolist,
-        props: { activeMenu: 'all' }
+        component: Todolist
     },
     {
         path: '/pending',
         name: 'pending',
-        component: Todolist,
-        props: { activeMenu: 'pending' }
+        component: Todolist
     },
     {
         path: '/completed',
         name: 'completed',
-        component: Todolist,
-        props: { activeMenu: 'completed' }
+        component: Todolist
     }
   ]
 })
