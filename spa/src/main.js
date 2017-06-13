@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-import 'font-awesome/css/font-awesome.css'; //doesn't work on dev server
+//import 'font-awesome/css/font-awesome.css'; //doesn't work on dev server
 import _ from 'lodash';
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 import bus from './components/bus';
 import { store } from './store/index.js';
 
-var host = '192.168.1.70:8080';
+var host = 'todo.asmyshlyaev177.tk';
 export { host };
 
 Vue.directive('focus', {

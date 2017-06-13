@@ -38,6 +38,7 @@ export default {
 <style>
 #app {
 @import '~bulma/css/bulma.css';
+@import './assets/icons.css';
 }
     
 .disabled, .disabled:hover {
@@ -57,7 +58,7 @@ a:hover {
 .icon.myloader-container {
     width: 10em;
     height: 10em;
-    display: block;
+    display: flex;
     position: absolute;
     top: 3em;
     margin-left: auto;
@@ -67,7 +68,7 @@ a:hover {
     color: rgba(113, 255, 120, 0.74);
 }
     
-i.fa-spinner.myloader {
-    font-size: 10em!important;
+i.myloader {
+    font-size: 12em!important;
 }
 </style>

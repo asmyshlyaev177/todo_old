@@ -46,6 +46,7 @@ Vue.directive('focus', {
 <style>
 #app {
 @import '~bulma/css/bulma.css';
+@import '../assets/icons.css';
 }
     
 .disabled, .disabled:hover {

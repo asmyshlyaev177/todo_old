@@ -12,6 +12,12 @@
     "nuxt": "nuxt",
     "nuxt-start": "nuxt start"
   },
+"config": {
+ "nuxt": {
+    "host": "0.0.0.0",
+    "port": "3015"
+ } 
+},
   "dependencies": {
     "bulma": "^0.4.2",
     "font-awesome": "^4.7.0",
