@@ -3,7 +3,7 @@
 <div class="card">
   <header class="card-header">
     <div class="column is-1 has-text-left todo-completed">
-        <span v-if="todoCompleted" class="icon"><i class="fa fa-check fa-lg"></i></span>
+        <span v-if="todoCompleted" class="icon"><i class="icon-checkmark"></i></span>
     </div>
     <p v-if="!editing" class="card-header-title" :class="{finished: todoCompleted}" >
       {{ todo.title }}
@@ -15,13 +15,13 @@
     <a v-if="!editing && !deleting" @click="edit" class="card-header-icon">
 <!-- edit title button-->
       <span class="icon">
-        <i class="fa fa-pencil"></i>
+        <i class="icon-pencil"></i>
       </span>
     </a>
 <!-- save button-->
     <a v-if="editing && !newTodo" @click="saveTodoTitle" class="card-header-icon">
       <span class="icon">
-        <i class="fa fa-check"></i>
+        <i class="icon-checkmark"></i>
       </span>
     </a>
   </header>
@@ -36,28 +36,28 @@
     
   <footer class="card-footer">
       <a v-if="!deleting && !newTodo" @click="addTask" :class="{ disabled: disabled }" class="card-footer-item">
-          <span class="icon"><i class="fa fa-plus"></i></span>
+          <span class="icon"><i class="icon-plus"></i></span>
               <span>Add task</span>
       </a>
       <a v-if="!deleting && !newTodo" @click="clickDelete" :class="{ disabled: disabled }" class="card-footer-item">
-          <span class="icon"><i class="fa fa-trash-o"></i></span>
+          <span class="icon"><i class="icon-bin"></i></span>
               <span>Delete</span>
       </a>
       <a v-if="deleting && !newTodo" @click="deleteThisTodo" class="card-footer-item">
-          <span class="icon"><i class="fa fa-check"></i></span>
+          <span class="icon"><i class="icon-checkmark"></i></span>
               <span>Sure!</span>
       </a>
       <a v-if="deleting && !newTodo" @click="deleting=false" class="card-footer-item">
-          <span class="icon"><i class="fa fa-ban"></i></span>
+          <span class="icon"><i class="icon-cross"></i></span>
               <span>Nope</span>
       </a>  
 <!-- buttons for new todo -->
        <a v-if="newTodo" @click="saveNewTodo" class="card-footer-item">
-          <span class="icon"><i class="fa fa-check"></i></span>
+          <span class="icon"><i class="icon-checkmark"></i></span>
               <span>Ok</span>
        </a>   
        <a v-if="newTodo" @click="discardNewTodo" class="card-footer-item">
-          <span class="icon"><i class="fa fa-ban"></i></span>
+          <span class="icon"><i class="icon-cross"></i></span>
               <span>Cancel</span>
        </a>
       

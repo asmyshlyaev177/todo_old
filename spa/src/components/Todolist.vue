@@ -7,7 +7,7 @@
             <Todo v-if="newTodo.addingNew" :todo="newTodo" ></Todo>
 
             <span v-if="fetching" class="icon is-large myloader-container">
-                <i class="fa fa-spin fa-spinner fa-6 myloader">
+                <i class="icon-spinner myloader rotating">
                 </i>
             </span>
             <Todo v-else v-for="todo in todolistFiltered" :key=todo.id :todo="todo" ></Todo>
