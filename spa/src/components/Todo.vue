@@ -26,7 +26,7 @@
     </a>
   </header>
     
-  <div class="card-content">
+  <div v-sort="tasklist" class="card-content tasklist">
       
 <AppTask v-for="taskEl in todo.task" :task="taskEl" :key=taskEl.id></AppTask>
 <AppTask v-if="newTask.addingNew" :task="newTask"
@@ -106,6 +106,9 @@ export default {
             if (!this.todo.id) {
                 return true 
             } else { return false }
+        },
+        tasklist() {
+            return this.todo.task
         }
     },
     watch: {

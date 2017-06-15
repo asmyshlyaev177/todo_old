@@ -7,6 +7,7 @@ import Vuex from 'vuex';
 import _ from 'lodash';
 import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
+import Sortable from 'sortablejs'
 Vue.use(VueResource);
 Vue.use(Vuex);
 Vue.use(VueRouter);
@@ -20,6 +21,19 @@ Vue.directive('focus', {
   }
 })
 
+Vue.directive('sort', {
+  inserted: function (el, binding) {
+    var sortable = new Sortable(el, {
+        onUpdate(ev) {
+            var tasklist = _.clone(binding.value);
+            let data = {tasklist: tasklist, todoid: binding.value[0].todo, 
+                    oldIndex: ev.oldIndex, newIndex: ev.newIndex};
+            store.dispatch('updateTaskOrder', data) 
+        },
+        animation: 150
+    });
+  }
+})
 
 const store = new Vuex.Store({
   state: {
@@ -34,6 +48,21 @@ const store = new Vuex.Store({
           Vue.http.get('http://'+host+'/todolist/')
             .then(response => {
                 store.commit('FetchAllTodo', response.body)
+            }, response => { //error
+                console.log(response)
+            });
+      },
+      updateTaskOrder(context, data) {
+          var oldEl = data.tasklist[data.oldIndex];
+          data.tasklist.splice(data.oldIndex, 1);
+          data.tasklist.splice(data.newIndex, 0, oldEl);
+          data.tasklist.forEach(function(currentValue, index, array) {
+	            data.tasklist[index].order = index;
+          });
+          Vue.http.patch('http://'+host+'/todo/'+data.todoid, {task: data.tasklist} )
+            .then(response => {
+                store.commit('UpdateTaskOrder', {tasklist: response.body,
+                                                 todoid: data.todoid})
             }, response => { //error
                 console.log(response)
             });
@@ -115,6 +144,13 @@ const store = new Vuex.Store({
     FetchAllTodo(state, data) {
         state.todolist = data;
         store.state.fetching = false
+    },
+    UpdateTaskOrder(state, data) {
+        let todoIndex = _.findKey(state.todolist, ['id', data.todoid]);
+        let taskCount = state.todolist[todoIndex].task.length;
+        
+        console.log(data)
+        state.todolist[todoIndex].task.splice(0, taskCount, ...data.tasklist.task);
     },
     CreateNewTodo(state, data) {
         state.newTodo.addingNew = false;
