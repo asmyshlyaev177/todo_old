@@ -1,5 +1,5 @@
 <template>
-    <div class="content" order=0> 
+    <div class="content" :order="task.order" :id="task.id"> 
       <div class="card level columns is-mobile is-gapless" ref="taskContainer">
           <div class="column is-1 has-text-left">
             <span v-if="task.complete" class="icon"><i class="icon-checkmark"></i></span>

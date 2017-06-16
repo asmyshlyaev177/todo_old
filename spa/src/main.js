@@ -25,12 +25,16 @@ Vue.directive('sort', {
   inserted: function (el, binding) {
     var sortable = new Sortable(el, {
         onUpdate(ev) {
-            var tasklist = _.clone(binding.value);
+            let tasklist = _.clone(binding.value);
+            console.log(tasklist);
             let data = {tasklist: tasklist, todoid: binding.value[0].todo, 
                     oldIndex: ev.oldIndex, newIndex: ev.newIndex};
             store.dispatch('updateTaskOrder', data) 
         },
-        animation: 150
+        animation: 50,
+        filter: "input",
+        //draggable: ".content"
+        //handle: ".card"
     });
   }
 })
@@ -61,7 +65,7 @@ const store = new Vuex.Store({
           });
           Vue.http.patch('http://'+host+'/todo/'+data.todoid, {task: data.tasklist} )
             .then(response => {
-                store.commit('UpdateTaskOrder', {tasklist: response.body,
+                store.commit('UpdateTaskOrder', {tasklist: response.body.task,
                                                  todoid: data.todoid})
             }, response => { //error
                 console.log(response)
@@ -148,9 +152,7 @@ const store = new Vuex.Store({
     UpdateTaskOrder(state, data) {
         let todoIndex = _.findKey(state.todolist, ['id', data.todoid]);
         let taskCount = state.todolist[todoIndex].task.length;
-        
-        console.log(data)
-        state.todolist[todoIndex].task.splice(0, taskCount, ...data.tasklist.task);
+        state.todolist[todoIndex].task.splice(0, taskCount, ...data.tasklist);
     },
     CreateNewTodo(state, data) {
         state.newTodo.addingNew = false;

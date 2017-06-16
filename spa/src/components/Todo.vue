@@ -28,7 +28,7 @@
     
   <div v-sort="tasklist" class="card-content tasklist">
       
-<AppTask v-for="taskEl in todo.task" :task="taskEl" :key=taskEl.id></AppTask>
+<AppTask v-for="taskEl in tasklist" :task="taskEl" :key=taskEl.id></AppTask>
 <AppTask v-if="newTask.addingNew" :task="newTask"
          @saveNewTask="saveNewTask" @discardNewTask="discardNewTask"></AppTask>
       
@@ -83,7 +83,7 @@ export default {
         }.bind(this));
         if (this.todo.addingNew) {
             this.editing = true
-        }
+        };
     },
     data() {
         return {
@@ -108,7 +108,7 @@ export default {
             } else { return false }
         },
         tasklist() {
-            return this.todo.task
+            return _.sortBy(this.todo.task, 'order')
         }
     },
     watch: {
